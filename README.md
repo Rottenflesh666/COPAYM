@@ -1,5 +1,4 @@
-# COPAYM  
-COPAYM  
+# Communal Payments | how to get started
 firt, open file server\config\config.js  
 const development = {  
   server: {  
