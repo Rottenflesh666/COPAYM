@@ -1,6 +1,7 @@
 import React from 'react';
 import SingleInput from "../common/single-input/single-input";
 import {inject, observer} from 'mobx-react';
+import { observable } from "mobx";
 import { ListGroup, ListGroupItem, ButtonGroup, Button } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,15 +10,17 @@ import NewPeople from "../people-list/NewPeople";
 @inject("managerStore")
 @observer
 class PeopleList extends React.Component {
+
+    @observable
+    compState = {
+        newPeopleIsOpen : false,
+        selected        : null,
+        selectedUserID  : null,
+        selectedUserName: null
+    };
+
     constructor(props){
         super(props);
-
-        this.state = {
-            newPeopleIsOpen : false,
-            selected        : null,
-            selectedUserID  : null,
-            selectedUserName: null
-        };
 
         this.toggleNewUser = this.toggleNewUser.bind(this);
     }
@@ -63,7 +66,7 @@ class PeopleList extends React.Component {
     };
 
     onClickListItemHandle(user, selectedIndex){
-        this.setState({
+        this.compState = ({
             selected        : selectedIndex,
             selectedUserID  : user.userID,
             selectedUserName: user.fullName
@@ -71,29 +74,30 @@ class PeopleList extends React.Component {
     }
 
     closeNewPeople(){
-        this.setState({newPeopleIsOpen: false});
+        this.compState.newPeopleIsOpen = false;
     }
 
     onClickNewPeopleHandle(){
-        this.setState({newPeopleIsOpen: true});
+        this.compState.newPeopleIsOpen = true;
     }
 
     onClickDeleteHandle(){
         let token = localStorage.getItem("id_token");
         if (token !== null) token = "Bearer " + localStorage.getItem("id_token");
+
         fetch("/peopleList/delete", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": token,
             },
-            body: JSON.stringify({_id: this.state.selectedUserID})
+            body: JSON.stringify({_id: this.compState.selectedUserID})
         })
             .then((response) => {
                 switch (response.status){
                     case 200:
-                        this.props.managerStore.deletePeople(this.state.selectedUserID);
-                        this.setState({
+                        this.props.managerStore.deletePeople(this.compState.selectedUserID);
+                        this.compState = ({
                             selected        : null,
                             selectedUserID  : null,
                             selectedUserName: null
@@ -114,21 +118,21 @@ class PeopleList extends React.Component {
     }
 
 
+    onClickPeopleData(){
+        localStorage.setItem("userName", this.compState.selectedUserName);
+        this.props.history.push("/client/" + this.compState.selectedUserID);
+    }
+
+
     toggleNewUser(result) {
-        console.log(result.userID);
         if(result.userID !== undefined){
             this.props.managerStore.addPeople(result);
         }
-
-        this.setState({
-                newPeopleIsOpen: !this.state.newPeopleIsOpen
-        })
+        this.compState.newPeopleIsOpen = !this.compState.newPeopleIsOpen;
     }
 
     showNewUser() {
-        this.setState({
-            newPeopleIsOpen: true
-        });
+        this.compState.newPeopleIsOpen = true;
     }
 
     showUsersList(){
@@ -136,7 +140,7 @@ class PeopleList extends React.Component {
             return (
                 <ListGroup>
                     {this.props.managerStore.usersList.map((user, index) => (
-                        <ListGroupItem className="list-item-user text-left" tag="button" active={this.state.selected === index}
+                        <ListGroupItem className="list-item-user text-left" tag="button" active={this.compState.selected === index}
                                        onClick={() => this.onClickListItemHandle(user, index)}>
                             {user.fullName}
                         </ListGroupItem>
@@ -156,7 +160,7 @@ class PeopleList extends React.Component {
         let houseAddress = localStorage.getItem("houseAddress");
         return(
             <div >
-                <NewPeople houseID={localStorage.getItem("houseID")} managerID={localStorage.getItem("managerID")} isOpen={this.state.newPeopleIsOpen} toggleWin = {this.toggleNewUser}/>
+                <NewPeople houseID={localStorage.getItem("houseID")} managerID={localStorage.getItem("managerID")} isOpen={this.compState.newPeopleIsOpen} toggleWin = {this.toggleNewUser}/>
 
                 <div className="header-peoples bg-primary">
                     Дом# {' '} {houseAddress}
@@ -164,13 +168,19 @@ class PeopleList extends React.Component {
                 {this.showUsersList()}
                 <div className="footer bg-primary h-45px">
                     <div className="align-left">
+                        <Button className="btn-light" onClick={()=>this.onClickPeopleData()} disabled={this.compState.selected ===  null}>
+                            <FontAwesomeIcon icon="user-tag"/>
+                            <span className="pl-2">Просмотр</span>
+                        </Button>
+                    </div>
+                    <div className="align-right ml-1">
                         <Button className="btn-light" onClick={()=>this.onClickNewPeopleHandle()}>
                             <FontAwesomeIcon icon="user-plus"/>
                             <span className="pl-2">Добавить</span>
                         </Button>
                     </div>
                     <div className="align-right">
-                        <Button className="btn-light" onClick={()=>this.onClickDeleteHandle()} disabled={this.state.selected ===  null}>
+                        <Button className="btn-light" onClick={()=>this.onClickDeleteHandle()} disabled={this.compState.selected ===  null}>
                             <FontAwesomeIcon icon="user-minus" />
                             <span className="pl-2">Удалить</span>
                         </Button>
@@ -182,38 +192,3 @@ class PeopleList extends React.Component {
 }
 
 export default PeopleList;
-
-/*
-
-  <form  onSubmit={this.handleFormSubmit}>
-                    <div>
-                        {this.props.managerStore.peopleList !== [] ?
-                            <ul>
-                                {this.props.managerStore.usersList.map(user => (
-                                    <li>{user.fullName}</li>))}
-                            </ul>
-                            : <span>no data</span>
-                        }
-                    </div>
-
-                </form>
-*/
-
-
- //  {/*<div>
- //           {this.props.managerStore.houseList.map((item, index)=>(
- //             <Item key={index} item={item} />
- //           ))}
- //         </div>*/}
-//{/*<SingleInput
- //           className="form-input"
- //           name={"groupName"}
-//            inputType={"text"}
-//            value={this.props.managerStore.house.address}
-//            controlFunc={this.props.managerStore.handleAddressChange}
-//            placeholder={"адрес дома"} />
-//          <input
-//            type={"submit"}
-//            className={"frmSubmitBtn"}
-//            value={"Submit"} />*/}
-

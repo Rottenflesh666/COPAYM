@@ -32,7 +32,7 @@ export default class HeaderNavigation extends React.Component {
         this.setState({menuOpen: false})
     }
 
-     capitalizeFirstLetter(string) {
+    capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
@@ -81,9 +81,10 @@ export default class HeaderNavigation extends React.Component {
 
     createBackButton(path){
         //образец: module\любойсимвол
+        //Список страниц для которых надо рисовать кнопку назад
         const pagesForBackButton = [
             /manager[\/]\w/,
-            /test[\/]\w/
+            /client[\/]\w/
         ];
         let pos = pagesForBackButton.some(function(element){
             return element.test(path)?true:false;

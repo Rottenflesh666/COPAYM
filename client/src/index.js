@@ -17,11 +17,13 @@ import {
     faChartBar, faComments, faUsers,
     faRubleSign, faHome, faArrowLeft,
     faSignInAlt, faSignOutAlt, faExclamationTriangle,
-    faUserPlus, faUserMinus
+    faUserPlus, faUserMinus, faUserTag,
+    faHotTub, faTint, faBolt, faFire, faScrewdriver,  faThermometerThreeQuarters
 } from '@fortawesome/free-solid-svg-icons';
 library.add(faComments, faChartBar, faRubleSign, faExclamationTriangle,
     faHome, faSignInAlt, faSignOutAlt, faUsers, faArrowLeft,
-    faUserPlus, faUserMinus);
+    faUserPlus, faUserMinus, faUserTag,
+    faHotTub, faTint, faBolt, faFire, faScrewdriver,  faThermometerThreeQuarters);
 
 const store = {
   loginStore: loginStore,

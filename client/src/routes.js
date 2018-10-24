@@ -5,9 +5,11 @@ import {Switch, Route, Link} from 'react-router-dom'
 import Home from './components/home';
 import ManagerHome from './components/manager';
 import ClientHome from './components/client';
+import ClientData from './components/client/ClientData';
 import Login from './components/login';
 import PeopleList from './components/people-list';
 import HeaderNavigation from "./components/HeaderNavigator";
+import NotFound from "./components/notfound";
 
 
 const Routes = () => (
@@ -20,9 +22,11 @@ const Routes = () => (
                 <Route path='/login' component={Login}/>
                 <Route path='/manager/:id' component={PeopleList}/>
                 <Route path='/manager' component={ManagerHome}/>
-                <Route path='/client' component={ClientHome}/>
-                {/*<Route path='/manager/home/:id' component={}/>*/}\
+                <Route path='/client/:id/:id' component={ClientData}/>
+                <Route path='/client/:id' component={ClientHome}/>
+                <Route component={NotFound}/>
             </Switch>
+
         </div>
 
 
@@ -30,23 +34,3 @@ const Routes = () => (
 );
 
 export default Routes;
-
-/*
- <div className="container-fluid">
-        <div className="row bg-primary text-white h4 fixed-top">
-                 <HeaderNavigation />
-        </div>
-        <div className="row py-5">
-            <Link to="/login">Login</Link>
-
-            <Switch>
-                <Route exact path='/' component={Home}/>
-                <Route path='/login' component={Login}/>
-                <Route path='/manager/:id' component={PeopleList}/>
-                <Route path='/manager' component={ManagerHome}/>
-                <Route path='/client' component={ClientHome}/>
-
-</Switch>
-</div>
-</div>
- */

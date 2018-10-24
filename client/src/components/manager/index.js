@@ -82,20 +82,4 @@ class ManagerHome extends React.Component {
     }
 }
 
-/*
- <ListGroupItem className="list-item" tag={Link} to={"/manager/" + house.id}>
-                        {house.address}
-                    </ListGroupItem>
- */
-
 export default ManagerHome;
-
-/*
-                        {this.props.managerStore.housesList !== undefined ?
-                            <ul>
-                                {this.props.managerStore.housesList.map(house => (
-                                    <li><Link to={"/manager/" + house.id}>{house.address}</Link></li>))}
-                            </ul>
-                            : <div/>
-                        }
- */
