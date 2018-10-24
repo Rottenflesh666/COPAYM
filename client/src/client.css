@@ -1,0 +1,244 @@
+white{
+    color: white;
+}
+
+.indentTop {
+    padding-top: 60px !important;
+}
+
+.indentAll{
+    padding: 20px;
+}
+
+.header {
+    height: 38px !important;
+}
+
+.header-icon{
+    float: left !important;
+    margin-top: -4px !important;
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+    padding: 0;
+}
+
+.header-peoples{
+    position : relative;
+    top : -7px;
+    height : 25px;
+    width:100%;
+    color: white;
+    padding-left: 10px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.list-item-user {
+    padding: 5px;
+    height: 35px;
+    margin-right: 0em;
+    color: black;
+    font-size: 16px;
+    background-color: white; /*#f4fdff;*/
+    line-height: 0;
+    text-decoration: none;
+    transition: background-color ease 0.5s;
+}
+.list-item-user:hover{
+    background-color: #97d5ff;
+}
+
+/*.list-item-user:active{
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+}*/
+.pb-26px {
+    padding-bottom: 26px;
+}
+
+.center-screen{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -120px;
+    width: 200px;
+    height: 200px;
+}
+
+.h-45px{
+    height: 45px;
+}
+
+.align-left{
+    float: left;
+}
+
+.align-right{
+    float: right;
+}
+
+.footer{
+    position : absolute;
+    bottom : 0px;
+    width:100%;
+    padding: 3px;
+}
+
+.list-item {
+    padding: 10px;
+    background-color: #ffffff;
+    margin-right: 0em;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.list-item:hover{
+    text-decoration: none;
+    background-color: #418eff;
+    color: white;
+}
+
+.display-block {
+    display: block;
+}
+
+/*************** Стили формы *********************/
+.form-label{
+    margin-bottom: -20px;
+}
+
+.form-input{
+    box-sizing: border-box;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #418eff;
+    border-radius: 4px;
+    transition: box-shadow 0.5s ease;
+}
+.form-input:focus{
+    box-shadow: 0 0 15px #418eff;
+}
+.form-submit{
+    width: 75%;
+    border-radius: 4px;
+    font-size: 20px;
+    box-shadow: 0 0 8px #418eff;
+    margin-top: 25px;
+    padding: 9px 39px 10px 39px;
+}
+
+
+/*
+.form-input:invalid    {
+    border-color: red;
+}
+
+.form-input:invalid:focus    {
+    box-shadow: 0 0 15px red;
+}
+*/
+/************************************************************/
+
+.custom-toggler .navbar-toggler {
+    border-color: rgb(255,255,255);
+}
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='4' stroke-linecap='round' stroke-miterlimit='1' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+/********************** Burger menu стили ***********************************/
+.menu-icon{
+    transition: color 0.5s ease;
+    color: #418eff;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 15px;
+    top: 12px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+    background: #ffff;
+}
+
+.bm-menu-wrap {
+    bottom: 0;
+    left: 0;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+    height: 34px;
+    width: 34px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+    background: #000000;
+}
+
+/* General sidebar styles */
+.bm-menu {
+    background: #ffffff;
+    padding: 1.5em 0 0;
+    font-size: 1.15em;
+    height: 50%!important;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: black;/*#b8b7ad;*/
+    padding: 0.0em;
+}
+
+
+/* Individual item */
+.bm-item{
+    display: inline-block;
+    /*
+    text-decoration: none!important;
+    padding: 0.3em;*/
+}
+.menu-item {
+    padding: 10px;
+    background-color: #ffffff;
+    margin-right: 0em;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+.menu-item:hover{
+    text-decoration: none;
+    background-color: #418eff;
+    color: white;
+}
+
+.menu-item:hover .menu-icon{
+    color: white;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    top: 0px!important;
+    left: 0px!important;
+    background: rgba(0, 0, 0, 0.3);
+}
